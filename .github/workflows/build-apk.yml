@@ -32,8 +32,11 @@ jobs:
           gradle-version: '8.13'
 
       - name: Build APK
-        working-directory: jamalai
-        run: gradle :app:assembleDebug
+  working-directory: jamalai
+  run: |
+    echo "android.useAndroidX=true" >> gradle.properties
+    echo "android.enableJetifier=true" >> gradle.properties
+    gradle :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
